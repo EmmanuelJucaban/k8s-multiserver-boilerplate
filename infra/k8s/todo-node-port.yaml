@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-node-port
+spec:
+  type: NodePort
+  ports:
+    - port: 3002
+#     nodePort is the port we visit in localhost to view
+# the POD that this NodePort is giving access to the outside world
+      nodePort: 30011
+  selector:
+    type: todo-app-pod
+

@@ -5,4 +5,9 @@ const port = 3002;
 
 const app = express();
 
-app.listen(port, () => console.log('yee'));
+app.get('/', (req, res) => {
+  res.send('yeee we out here');
+});
+
+
+app.listen(port, () => console.log(' we out here'));
