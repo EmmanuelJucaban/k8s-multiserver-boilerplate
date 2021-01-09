@@ -5,10 +5,16 @@ metadata:
 spec:
   type: NodePort
   ports:
+#    Convention is that both of these are the same, but port isn't needed
     - port: 3002
-#     nodePort is the port we visit in localhost to view
-# the POD that this NodePort is giving access to the outside world
+      targetPort: 3002
+      name: "todo"
       nodePort: 30011
+    #      Map MY PORT 3003 to 3000 of the selected pod
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30012
+      name: "client"
   selector:
-    type: todo-app-pod
+    app: todo-app
 
