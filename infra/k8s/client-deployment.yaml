@@ -1,22 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client-deployment
+  name: todo-client-deployment
   labels:
-    app: client-deployment
+    type: todo-client-deployment
 spec:
   template:
     metadata:
-      name: client-pod
+      name: todo-client
       labels:
+        component: todo-client
         app: todo-app
     spec:
       containers:
-        - name: client-service
+        - name: todo-client-service
           image: jukeaban/todok8client
           ports:
             - containerPort: 3000
   selector:
     matchLabels:
-      app: todo-app
+      component: todo-client
   replicas: 1

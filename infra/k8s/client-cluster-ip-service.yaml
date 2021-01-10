@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-cluster-ip-service
+  labels:
+    type: client-cluster
+spec:
+  type: ClusterIP
+  selector:
+    component: todo-client
+  ports:
+    - port: 3000
+      targetPort: 3000
+

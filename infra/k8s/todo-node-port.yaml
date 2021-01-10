@@ -5,16 +5,26 @@ metadata:
 spec:
   type: NodePort
   ports:
-#    Convention is that both of these are the same, but port isn't needed
+    #      Map MY PORT 30000 to 3000 of the selected pod
+    - port: 3000
+      targetPort: 3000
+      nodePort: 30000
+      name: "client"
+    #    Convention is that both of these are the same, but port isn't needed
+
+    - port: 3001
+      targetPort: 3001
+      nodePort: 30002
+      name: "user"
+
     - port: 3002
       targetPort: 3002
       name: "todo"
-      nodePort: 30011
-    #      Map MY PORT 3003 to 3000 of the selected pod
-    - port: 3000
-      targetPort: 3000
-      nodePort: 30012
-      name: "client"
+      nodePort: 30001
+
   selector:
+    #     Target component label for a single one deployment
+    #    target app label for many deployments
     app: todo-app
+
 

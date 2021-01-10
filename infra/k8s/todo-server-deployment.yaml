@@ -3,23 +3,22 @@ kind: Deployment
 metadata:
   name: todo-server-deployment
   labels:
-    app: todo-app
-    type: todo-app-deployment
+    type: todo-server-deployment
 spec:
   template:
     metadata:
-      name: todo-server-pod
+      name: todo-server
       labels:
+        component: todo-server
         app: todo-app
-        type: todo-app-pod
     spec:
       containers:
-        - name: todo-service
+        - name: todo-server-service
           image: jukeaban/todok8todo
           ports:
             - containerPort: 3002
   selector:
     matchLabels:
-      type: todo-app-pod
+      component: todo-server
   replicas: 1
 

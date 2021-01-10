@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-deployment
+  labels:
+    type: user-server-deployment
+spec:
+  template:
+    metadata:
+      name: user-server
+      labels:
+        component: user-server
+        app: todo-app
+    spec:
+      containers:
+        - name: user-server-service
+          image: jukeaban/todok8user
+          ports:
+            - containerPort: 3001
+  selector:
+    matchLabels:
+      component: user-server
+  replicas: 1

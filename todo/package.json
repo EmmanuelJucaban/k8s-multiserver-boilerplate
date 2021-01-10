@@ -11,8 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@typegoose/typegoose": "^7.4.6",
     "express": "^4.17.1",
-    "typegoose": "^5.9.1"
+    "mongoose": "^5.11.11"
   },
   "devDependencies": {
     "@types/mongoose": "^5.10.3",
