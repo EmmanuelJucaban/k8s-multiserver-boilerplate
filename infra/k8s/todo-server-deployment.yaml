@@ -26,13 +26,10 @@ spec:
                 secretKeyRef:
                   key: PORT
                   name: todo-app-secrets
-            - name: LALA
-              valueFrom:
-                secretKeyRef:
-                  key: LALA
-                  name: todo-app-secrets
           ports:
             - containerPort: 3002
+
+
 
   selector:
     matchLabels:

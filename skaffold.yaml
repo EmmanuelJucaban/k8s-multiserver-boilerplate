@@ -4,27 +4,43 @@ build:
   local:
     push: false
   artifacts:
+#    - image: jukeaban/todok8client
+    #      context: client
+    #      docker:
+    #        dockerfile: Dockerfile
+    #      sync:
+    #        manual:
+    #          - src: "**/*.tsx"
+    #            dest: .
+    #          - src: "**/*.css"
+    #            dest: .
+    - image: jukeaban/todok8user
+      context: user
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.ts"
+            dest: .
     - image: jukeaban/todok8todo
       context: todo
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "**/*.js*"
-            dest: .
-    - image: jukeaban/todok8client
-      context: client
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "**/*.tsx"
-            dest: .
-          - src: "**/*.css"
+          - src: "**/*.ts*"
             dest: .
 deploy:
   kubectl:
     manifests:
-      - infra/k8s/todo-deployment.yaml
-      - infra/k8s/todo-node-port.yaml
-      - infra/k8s/client-deployment.yaml
+      #      - infra/k8s/client-deployment.yaml
+      #      - infra/k8s/client-cluster-ip-service.yaml
+      - infra/k8s/mongo-cluster-ip-service.yaml
+      - infra/k8s/mongo-deployment.yaml
+      - infra/k8s/secrets.yaml
+      - infra/k8s/ingress-service.yaml
+      - infra/k8s/todo-server-deployment.yaml
+      - infra/k8s/todo-server-cluster-ip-service.yaml
+      - infra/k8s/user-server-deployment.yaml
+      - infra/k8s/user-server-cluster-ip-service.yaml
+      - infra/k8s/mongo-persistent-volume-claim.yaml
