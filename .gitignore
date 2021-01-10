@@ -2,3 +2,4 @@ node_modules
 .idea
 .vscode
 .DS_STORE
+infra/k8s/secrets.yaml

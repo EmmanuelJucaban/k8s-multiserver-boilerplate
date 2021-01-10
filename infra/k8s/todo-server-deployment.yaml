@@ -15,8 +15,25 @@ spec:
       containers:
         - name: todo-server-service
           image: jukeaban/todok8todo
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  key: MONGODB_URI
+                  name: todo-app-secrets
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  key: PORT
+                  name: todo-app-secrets
+            - name: LALA
+              valueFrom:
+                secretKeyRef:
+                  key: LALA
+                  name: todo-app-secrets
           ports:
             - containerPort: 3002
+
   selector:
     matchLabels:
       component: todo-server

@@ -2,7 +2,6 @@ import express from 'express';
 import { getModelForClass, prop } from '@typegoose/typegoose';
 import { connect } from 'mongoose';
 
-const port = 3002;
 
 class Todo {
   @prop()
@@ -11,9 +10,12 @@ class Todo {
 
 const TodoModel = getModelForClass(Todo);
 
-connect('mongodb://localhost:27017/myapp', { useNewUrlParser: true })
+connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
-    console.log('Connected');
+    console.log('pro', process.env.MONGODB_URI);
+    if (process.env.LALA === 'LEET') {
+      console.log('YEEE');
+    }
   })
   .catch(e => console.log(e));
 
@@ -33,5 +35,5 @@ app.get('/', async (req, res) => {
 });
 
 
-app.listen(port, () => console.log('we out of here yee '));
+app.listen(process.env.PORT, () => console.log(`we out of here yee ${ process.env.PORT }`, process.env.PORT));
 
