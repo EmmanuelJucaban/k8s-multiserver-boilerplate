@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: todo-routes
+  namespace: default
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - todo-server-gateway # interpreted as reviews.foo.svc.cluster.local
+  http:
+    - match:
+        - uri:
+            prefix: "/users"
+      rewrite:
+        uri: "/"
+      route:
+        - destination:
+            host: user-server-cluster-ip-service # interpreted as reviews.foo.svc.cluster.local
+            port:
+              number: 3001
+
