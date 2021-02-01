@@ -12,24 +12,29 @@ spec:
         component: todo-server
         app: todo-app
     spec:
+      initContainers:
+        - name: init-myservice
+          image: busybox:1.28
+          command: ['sh', '-c', "until nslookup mongo-cluster-ip-service.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mongo-service; sleep 2; done"]
       containers:
         - name: todo-server-service
           image: jukeaban/todok8todo
           env:
             - name: MONGODB_URI
-              valueFrom:
-                secretKeyRef:
-                  key: MONGODB_URI
-                  name: todo-app-secrets
+              value: mongodb://mongo-cluster-ip-service/todos
+            ##              valueFrom:
+            ##                secretKeyRef:
+            ##                  key: MONGODB_URI
+            ##                  name: todo-app-secrets
             - name: PORT
-              valueFrom:
-                secretKeyRef:
-                  key: PORT
-                  name: todo-app-secrets
+              value: "3002"
+          #              valueFrom:
+          #                secretKeyRef:
+          #                  key: PORT
+          #                  name: todo-app-secrets
           ports:
             - containerPort: 3002
   selector:
     matchLabels:
       component: todo-server
   replicas: 1
-

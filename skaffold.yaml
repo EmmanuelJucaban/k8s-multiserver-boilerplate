@@ -4,16 +4,16 @@ build:
   local:
     push: false
   artifacts:
-#    - image: jukeaban/todok8client
-    #      context: client
-    #      docker:
-    #        dockerfile: Dockerfile
-    #      sync:
-    #        manual:
-    #          - src: "**/*.tsx"
-    #            dest: .
-    #          - src: "**/*.css"
-    #            dest: .
+    - image: jukeaban/todok8client
+          context: client
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            manual:
+              - src: "**/*.tsx"
+                dest: .
+              - src: "**/*.css"
+                dest: .
     - image: jukeaban/todok8user
       context: user
       docker:
@@ -38,7 +38,7 @@ deploy:
       - infra/k8s/mongo-cluster-ip-service.yaml
       - infra/k8s/mongo-deployment.yaml
       - infra/k8s/secrets.yaml
-      - infra/k8s/ingress-service.yaml
+#      - infra/k8s/ingress-service.yaml
       - infra/k8s/todo-server-deployment.yaml
       - infra/k8s/todo-server-cluster-ip-service.yaml
       - infra/k8s/user-server-deployment.yaml
